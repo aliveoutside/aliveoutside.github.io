@@ -1,0 +1,20 @@
+{{- if gt (len site.Languages) 1 -}}
+<nav aria-label="Language" class="language-switch">
+  <ul class="flex gap-2 text-xs">
+    {{- $current := .Page }}
+    {{- $all := slice $current }}
+    {{- if $current.IsTranslated }}
+      {{- $all = $current.AllTranslations }}
+    {{- end }}
+    {{- range site.Languages }}
+      {{- $isCurrent := eq .Lang $.Site.Language.Lang -}}
+      {{- $matches := where $all "Language.Lang" .Lang }}
+      {{- $candidate := cond (gt (len $matches) 0) (index $matches 0) nil }}
+      {{- $href := cond $candidate $candidate.RelPermalink (.Lang | relLangURL) }}
+      <li>
+        <a href="{{ $href }}" class="px-2.5 py-1 rounded-md text-[11px] tracking-wide border font-medium select-none transition-colors focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]/50 {{ if $isCurrent }}bg-[color:var(--primary)] text-white border-[color:var(--primary)] shadow-sm cursor-default{{ else }}bg-[color:var(--bg-mute)] border-[color:var(--border)] text-[color:var(--text-dim)] hover:text-[color:var(--text)] hover:bg-[color:var(--bg-soft)]{{ end }}" {{ if $isCurrent }}aria-current="true"{{ end }}>{{ .Lang | upper }}</a>
+      </li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end -}}

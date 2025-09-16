@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+
+<head>
+  <script>
+    (function () {
+      try {
+        var doc = document.documentElement;
+        var stored = localStorage.getItem('theme');
+        if (!stored) { stored = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        if (stored === 'dark') doc.classList.add('dark');
+      } catch (e) { /* silent */ }
+    })();
+  </script>
+  {{ with (templates.Defer (dict "key" "global")) }}
+  {{ partial "css.html" . }}
+  {{ end }}
+  {{ partial "head.html" . }}
+</head>
+
+<body>
+  <header class="site-header">
+    {{ partial "header.html" . }}
+  </header>
+  <div class="page-shell">
+    <main class="site-main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    <footer class="site-footer">
+      {{ partial "footer.html" . }}
+    </footer>
+  </div>
+</body>
+
+</html>

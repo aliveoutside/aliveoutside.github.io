@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <section class="space-y-6">
+    {{ range site.RegularPages.ByDate.Reverse }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </section>
+{{ end }}
+

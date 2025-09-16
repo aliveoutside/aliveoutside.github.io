@@ -1,0 +1,11 @@
+{{- /* Метаданные поста: ожидает .Page */ -}}
+{{- $p := . -}}
+{{- $minutes := math.Ceil (div (float $p.WordCount) 200) -}}
+<div class="flex flex-wrap items-center gap-3 text-xs text-[color:var(--text-dim)] mb-6">
+  <time datetime="{{ $p.Date }}">{{ $p.Date.Format (i18n "date_format") }}</time>
+  <span aria-label="Reading time">· {{ $minutes }} {{ i18n "min_read" }}</span>
+  {{ with $p.Params.tags }}
+    <span class="hidden sm:inline">·</span>
+    <span class="flex flex-wrap gap-2">{{ partial "tag-list.html" . }}</span>
+  {{ end }}
+  </div>

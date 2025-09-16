@@ -1,0 +1,40 @@
+{{- /* Простое адаптивное меню */ -}}
+
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+
+{{- with index site.Menus $menuID }}
+  <nav aria-label="Главная навигация">
+    <ul id="nav-menu" class="mt-0 flex flex-row items-center gap-3 border-0 bg-transparent p-0 shadow-none flex-nowrap overflow-x-auto">
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+    </ul>
+  </nav>
+{{- end }}
+
+{{- define "_partials/inline/menu/walk.html" }}
+  {{- $page := .page }}
+  {{- range .menuEntries }}
+    {{- $isCurrent := $page.IsMenuCurrent .Menu . }}
+    {{- $isAncestor := $page.HasMenuCurrent .Menu . }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}{{- $name = . }}{{- end }}
+    {{- end }}
+    {{- $linkClasses := "block rounded px-3 py-2 text-sm transition-colors" }}
+    {{- if $isCurrent }}
+      {{- $linkClasses = printf "%s %s" $linkClasses "font-semibold text-[color:var(--primary)]" }}
+    {{- else if $isAncestor }}
+      {{- $linkClasses = printf "%s %s" $linkClasses "text-[color:var(--primary)]/80" }}
+    {{- else }}
+      {{- $linkClasses = printf "%s %s" $linkClasses "text-[color:var(--text-dim)] hover:text-[color:var(--text)]" }}
+    {{- end }}
+    <li class="md:leading-none">
+      <a href="{{ .URL }}" class="{{ $linkClasses }}" {{ if $isCurrent }}aria-current="page"{{ else if $isAncestor }}aria-current="true"{{ end }}>{{ $name }}</a>
+      {{- with .Children }}
+        <ul class="hidden">
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        </ul>
+      {{- end }}
+    </li>
+  {{- end }}
+{{- end }}

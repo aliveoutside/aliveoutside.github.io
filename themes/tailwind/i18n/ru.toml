@@ -1,0 +1,23 @@
+[back_home]
+other = "на главную"
+
+[toc]
+other = "Содержание"
+
+[related]
+other = "Похожие материалы"
+
+[previous]
+other = "Предыдущий"
+
+[next]
+other = "Следующий"
+
+[min_read]
+other = "мин"
+
+[copied]
+other = "Скопировано"
+
+[date_format]
+other = "02.01.2006"

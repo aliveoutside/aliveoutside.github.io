@@ -1,0 +1,6 @@
+{{/* Render hook для заголовков: добавляет якорь */}}
+{{- $level := .Level -}}
+{{- $id := .Anchor | default (anchorize .Text) -}}
+<h{{ $level }} id="{{ $id }}" class="group heading relative">{{ .Text | safeHTML }}
+  <a href="#{{ $id }}" class="heading-anchor opacity-0 group-hover:opacity-100 focus:opacity-100" aria-label="Anchor">#</a>
+</h{{ $level }}>

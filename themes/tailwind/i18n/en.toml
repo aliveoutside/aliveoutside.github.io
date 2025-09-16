@@ -1,0 +1,23 @@
+[back_home]
+other = "back home"
+
+[toc]
+other = "Contents"
+
+[related]
+other = "Related posts"
+
+[previous]
+other = "Previous"
+
+[next]
+other = "Next"
+
+[min_read]
+other = "min read"
+
+[copied]
+other = "Copied"
+
+[date_format]
+other = "Jan 02, 2006"
