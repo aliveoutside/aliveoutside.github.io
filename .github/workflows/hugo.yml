@@ -47,7 +47,7 @@ jobs:
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Install Tailwind CSS
-        run: "npm install tailwindcss @tailwindcss/cli"
+        run: "npm install tailwindcss @tailwindcss/cli @tailwindcss/typography"
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
