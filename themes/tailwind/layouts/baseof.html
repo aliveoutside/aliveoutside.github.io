@@ -12,9 +12,7 @@
       } catch (e) { /* silent */ }
     })();
   </script>
-  {{ with (templates.Defer (dict "key" "global")) }}
   {{ partial "css.html" . }}
-  {{ end }}
   {{ partial "head.html" . }}
 </head>
 
