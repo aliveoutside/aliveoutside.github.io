@@ -1,7 +1,9 @@
-{{- $lang := .Language | default "text" -}}
+{{- $lang := .Type | default "text" -}}
+{{- $opts := dict "style" "onedark" "linenos" "false" -}}
+{{- $code := highlight .Inner $lang $opts -}}
 <div class="code-block" data-lang="{{ $lang }}">
   <div class="code-block__bar">
     <span class="code-block__lang">{{ $lang }}</span>
   </div>
-  <pre><code{{ with .Language }} class="language-{{ . }}"{{ end }}>{{ .Inner | safeHTML }}</code></pre>
+  {{ $code | safeHTML }}
 </div>

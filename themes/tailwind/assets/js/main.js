@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
 	const themeButton = document.getElementById('theme-toggle');
 	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 	const root = document.documentElement;

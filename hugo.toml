@@ -1,51 +1,25 @@
-baseURL = 'http://localhost:3000/'
+baseURL = 'https://aliveoutside.github.io/'
 languageCode = 'en-US'
 title = 'Blog.'
 theme = 'tailwind'
-defaultContentLanguage = 'en'
-defaultContentLanguageInSubdir = true
 
 [params]
-  description = 'A minimal tech blog.'
+  description = 'Thoughts, notes and little experiments.'
 
-[languages]
-  [languages.en]
-    languageName = 'English'
-    weight = 1
-    title = 'Blog.'
-    contentDir = 'content/en'
-    [languages.en.params]
-      description = 'Thoughts, notes and little experiments.'
-  [languages.ru]
-    languageName = 'Русский'
-    weight = 2
-    title = 'Блог.'
-    contentDir = 'content/ru'
-    [languages.ru.params]
-      description = 'Мысли, заметки и небольшие эксперименты.'
+[markup]
+  [markup.highlight]
+    style = "onedark"
+    guessSyntax = true
+    lineNos = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
 
-[languages.en.menus]
-  [[languages.en.menus.main]]
+[menus]
+  [[menus.main]]
     name = 'Home'
     pageRef = '/'
     weight = 10
-  [[languages.en.menus.main]]
-    name = 'Tags'
-      pageRef = '/tags'
-      weight = 20
-[languages.ru.menus]
-  [[languages.ru.menus.main]]
-    name = 'Главная'
-    pageRef = '/'
-    weight = 10
-  [[languages.ru.menus.main]]
-    name = 'Теги'
-      pageRef = '/tags'
-      weight = 20
-[menus]
-  # EN
-  # RU
-
 
 [build]
   [build.buildStats]

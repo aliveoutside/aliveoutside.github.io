@@ -32,6 +32,10 @@ html.dark {
   --tag-bg-hover: #8b93ff35;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   color: var(--text);
   font-family: Inter, system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;

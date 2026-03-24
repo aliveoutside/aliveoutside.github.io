@@ -6,15 +6,15 @@
       {{ partial "post-meta.html" . }}
     </header>
     {{ if .TableOfContents }}
-    <aside class="toc border border-[color:var(--border)]/70 rounded-lg p-4 mb-6 bg-[color:var(--bg-mute)]/50">
-      <div class="text-xs uppercase tracking-wider text-[color:var(--text-dim)] mb-2">{{ i18n "toc" }}</div>
+    <aside class="toc border border-(--border)/70 rounded-lg p-4 mb-6 bg-(--bg-mute)/50">
+      <div class="text-xs uppercase tracking-wider text-(--text-dim) mb-2">{{ i18n "toc" }}</div>
       <nav class="prose prose-sm dark:prose-invert max-w-none toc__content">{{ .TableOfContents }}</nav>
     </aside>
     {{ end }}
     <div class="post-content prose prose-sm md:prose-base max-w-none dark:prose-invert">
       {{ .Content }}
     </div>
-    <footer class="mt-12 pt-6 border-t border-[color:var(--border)]/70 flex flex-col gap-6">
+    <footer class="mt-12 pt-6 border-t border-(--border)/70 flex flex-col gap-6">
   {{/* Related posts by shared tags (robust, no where+intersect) */}}
       {{ $cur := . }}
       {{ $tags := .Params.tags | default (slice) }}
@@ -47,15 +47,15 @@
         {{ if or $prev $next }}
           <div class="flex flex-col gap-4 w-full">
             {{ with $prev }}
-              <a class="nav-prev group rounded-lg border border-[color:var(--border)]/70 px-4 py-3 hover:border-[color:var(--primary)]/50 hover:bg-[color:var(--bg-mute)] transition" href="{{ .RelPermalink }}">
-                <span class="block text-[10px] uppercase tracking-wider text-[color:var(--text-dim)] mb-1">{{ i18n "previous" }}</span>
-                <span class="block font-medium group-hover:text-[color:var(--primary)]">← {{ .LinkTitle }}</span>
+              <a class="nav-prev group rounded-lg border border-(--border)/70 px-4 py-3 hover:border-(--primary)/50 hover:bg-(--bg-mute) transition" href="{{ .RelPermalink }}">
+                <span class="block text-[10px] uppercase tracking-wider text-(--text-dim) mb-1">{{ i18n "previous" }}</span>
+                <span class="block font-medium group-hover:text-(--primary)">← {{ .LinkTitle }}</span>
               </a>
             {{ end }}
             {{ with $next }}
-              <a class="nav-next group rounded-lg border border-[color:var(--border)]/70 px-4 py-3 hover:border-[color:var(--primary)]/50 hover:bg-[color:var(--bg-mute)] transition ml-auto" href="{{ .RelPermalink }}">
-                <span class="block text-[10px] uppercase tracking-wider text-[color:var(--text-dim)] mb-1">{{ i18n "next" }}</span>
-                <span class="block font-medium group-hover:text-[color:var(--primary)]">{{ .LinkTitle }} →</span>
+              <a class="nav-next group rounded-lg border border-(--border)/70 px-4 py-3 hover:border-(--primary)/50 hover:bg-(--bg-mute) transition ml-auto" href="{{ .RelPermalink }}">
+                <span class="block text-[10px] uppercase tracking-wider text-(--text-dim) mb-1">{{ i18n "next" }}</span>
+                <span class="block font-medium group-hover:text-(--primary)">{{ .LinkTitle }} →</span>
               </a>
             {{ end }}
           </div>
