@@ -5,13 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		function applyTheme(mode) {
 			if (mode === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
-			if (themeButton) {
-				const iconSpan = themeButton.querySelector('.theme-toggle__icon');
-				if (iconSpan) iconSpan.textContent = root.classList.contains('dark') ? '☀️' : '🌙';
-			}
+			root.setAttribute('data-theme', mode);
 		}
 
-	function currentStored() { return localStorage.getItem('theme'); }
+	function currentStored() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
+	function storeTheme(v) { try { localStorage.setItem('theme', v); } catch (e) {} }
 	function systemPref() { return prefersDark.matches ? 'dark' : 'light'; }
 
 	applyTheme(currentStored() || systemPref());
@@ -20,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		themeButton.setAttribute('aria-pressed', root.classList.contains('dark').toString());
 		themeButton.addEventListener('click', () => {
 			const next = root.classList.contains('dark') ? 'light' : 'dark';
-			localStorage.setItem('theme', next);
+			storeTheme(next);
 			applyTheme(next);
 			themeButton.setAttribute('aria-pressed', (next === 'dark').toString());
 		});

@@ -9,6 +9,7 @@
         var stored = localStorage.getItem('theme');
         if (!stored) { stored = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
         if (stored === 'dark') doc.classList.add('dark');
+        doc.setAttribute('data-theme', stored);
       } catch (e) { /* silent */ }
     })();
   </script>

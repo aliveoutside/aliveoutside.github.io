@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="space-y-6 pt-6">
+  <section class="space-y-6 pt-6 px-5">
     {{ range site.RegularPages.ByDate.Reverse }}
       {{ partial "post-card.html" . }}
     {{ end }}
