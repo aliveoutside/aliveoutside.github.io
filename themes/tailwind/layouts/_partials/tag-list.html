@@ -1,1 +1,1 @@
-{{- range . }}<span class="tag">{{ . }}</span>{{- end }}
+{{- range . }}<a href="{{ print "/tags/" (. | urlize) "/" }}" class="tag">{{ . }}</a>{{- end }}

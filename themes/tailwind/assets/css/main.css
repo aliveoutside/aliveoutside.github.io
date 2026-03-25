@@ -7,14 +7,14 @@
   --bg-mute: #eef0f3;
   --text: #213547; /* vitepress base */
   --text-dim: #5a6475;
-  --primary: #646cff; /* vite */
-  --primary-hover: #535bf2;
+  --primary: #535bf2; /* vite – darkened from #646cff for WCAG AA 5.08:1 on white */
+  --primary-hover: #4a50e4;
   --border: #e5e7eb;
   --card-bg: #ffffff;
   --code-bg: #f5f7fa;
-  --bg-glass: rgba(246,247,249,0.75);
-  --tag-bg: #646cff15;
-  --tag-bg-hover: #646cff22;
+  --bg-glass: rgba(246,247,249,0.82);
+  --tag-bg: #535bf215;
+  --tag-bg-hover: #535bf222;
 }
 html.dark {
   --bg: #1a1a1a;
@@ -56,12 +56,12 @@ body {
   z-index: 40;
   padding: 1rem 1.25rem;
 
-  background: rgba(0, 0, 0, 0);
+  background: var(--bg-glass);
   border: 1px solid transparent;
-  border-bottom-color: var(--border); 
+  border-bottom-color: var(--border);
   border-radius: 0;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   transition: all .3s ease-in-out;
 }
@@ -122,6 +122,9 @@ html[data-theme="dark"] .theme-toggle__icon::after { content: '☀️'; }
 html[data-theme="light"] .theme-toggle__icon::after { content: '🌙'; }
 html.dark .theme-toggle { background: var(--bg-soft); }
 
+.post-card__title { color: var(--text); }
+.post-card__title:hover { color: var(--primary); }
+
 .hover\:shadow-sm:hover { box-shadow: 0 1px 2px rgba(0,0,0,.04),0 1px 3px rgba(0,0,0,.08); }
 
 pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
@@ -140,8 +143,49 @@ pre { background: var(--code-bg); padding: 1rem; border-radius: .75rem; overflow
   text-transform: uppercase;
   transition: background-color .15s ease, color .15s ease;
 }
-.tag:hover { background: var(--tag-bg-hover); }
+.tag:hover { background: var(--tag-bg-hover); color: var(--primary-hover); }
 html.dark .tag { color: var(--primary); }
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  transform: rotate(-8deg);
+}
+.tag:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+.nav-prev:focus-visible, .nav-next:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: .5rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  font-size: .875rem;
+  font-weight: 500;
+  border-radius: 0 0 .5rem .5rem;
+  text-decoration: none;
+  transition: top .15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  color: #fff;
+}
+
+/* screen readers should not announce the decorative emoji */
+.theme-toggle__icon { speak: none; }
 
 .language-switch a[aria-current="true"] { color:#fff !important; }
 

@@ -1,5 +1,5 @@
 {{- $p := . -}}
-{{- $desc := or $p.Params.description $p.Summary -}}
+{{- $desc := or $p.Params.description ($p.Summary | plainify) -}}
 <article class="post-card rounded-lg border border-[color:var(--border)] p-5 hover:shadow-sm transition">
   <h2 class="text-lg font-semibold mb-2">
     <a href="{{ $p.RelPermalink }}" class="post-card__title hover:underline">{{ $p.LinkTitle }}</a>
